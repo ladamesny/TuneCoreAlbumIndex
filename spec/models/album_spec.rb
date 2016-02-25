@@ -1,6 +1,6 @@
 require 'rails_helper'
 
 describe  Album do
-  it "should have a title attribute" do
+  it "is valid with a title" do
   end
 end
