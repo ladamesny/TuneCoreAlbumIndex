@@ -24,10 +24,11 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'byebug'
   gem 'pry'
+  gem 'faker'
 end
 
 group :test do
-  gem 'faker'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'launchy'

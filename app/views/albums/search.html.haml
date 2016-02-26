@@ -1,0 +1,7 @@
+= form_tag itunes_path, method: :post do
+  .row
+    .col-md-6
+      = text_field_tag :term
+  .row
+    .col-md-6
+      =submit_tag 'Create Album', class: 'btn btn-primary'
