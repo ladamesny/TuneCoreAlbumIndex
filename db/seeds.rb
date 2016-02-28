@@ -1,4 +1,4 @@
-artists = ['Kanye West', 'Radiohead', 'The Killers', 'Nas', 'Homeboy Sandman', 'The Strokes', 'Daft Punk', 'Bob Marley', 'Alicia Keys', 'Aphex Twin', 'John Coltrane', 'Coldplay', 'Drake']
+artists = ['Kanye West', 'Radiohead', 'The Killers', 'Nas', 'Homeboy Sandman', 'The Strokes', 'Daft Punk', 'Bob Marley', 'Alicia Keys', 'Aphex Twin', 'John Coltrane', 'Coldplay', 'Drake', 'Pink Floyd', 'Jimi Hendrix', 'Led Zeppelin']
 
 artists.each do |name|
 
@@ -19,7 +19,7 @@ artists.each do |name|
   albums.each do |album|
     if album[:title].present?
       puts "Creating Album: #{album[:title]}"
-      newAlbum = Album.create(title: album[:title], albumId: album[:albumId])
+      newAlbum = Album.create(artist_id: artist.id,title: album[:title], albumId: album[:albumId])
       album_specific_results = artist_specific_results.select{ |record| record['collectionName'] == newAlbum.title }
       album_specific_results.each do |track|
         puts " := #{track['trackName']}"

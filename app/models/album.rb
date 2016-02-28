@@ -1,12 +1,14 @@
 class Album < ActiveRecord::Base
+  include PgSearch
+  pg_search_scope :search, :against => :title,
+    using: { tsearch: {dictionary: "english" } },
+    associated_against: { artist: :name, songs: :title },
+    ignoring: :accents
+
   belongs_to :artist
   has_many :songs, dependent: :destroy
 
   validates_presence_of :title
-  validates_uniqueness_of :title
+  validates_uniqueness_of :title, case_insensitive: false
 
-  def self.create_album term
-    response = ITunesSearchAPI.search(:term => term, :country => "US", :media => "music", kind: 'Album')
-    self.create(title: response.first['collectionName'], itunes_id: response.first['collectionId'])
-  end
 end
