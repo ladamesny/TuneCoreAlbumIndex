@@ -48,3 +48,20 @@
       });
     }
   };
+
+  $('#songs-list').on('click', 'tr', function(){
+    var audioElement = $(this).find('audio')[0];
+
+    $('audio').each(function(){
+      if (this != audioElement)
+        {
+          this.pause(); // Stop playing
+          this.currentTime = 0; // Reset time
+        }
+    });
+
+    if (audioElement.paused == true)
+      audioElement.play();
+    else
+      audioElement.pause();
+  });

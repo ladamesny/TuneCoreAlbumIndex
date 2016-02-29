@@ -1,6 +1,9 @@
-%tr
-  %td=song.track_number
+%tr{id: "song_#{song.id}", class: 'song'}
+  %td.play-button=song.track_number
   %td=song.title
-  %td=song.track_time
+  %td=convert_to_duration(song.track_time)
   %td=song.artist_name
   %td=song.album.title
+  %td{style: 'display:none;'}
+    %audio{ autoplay: false}
+      %source{src: song.preview, type: "audio/mpeg"}
