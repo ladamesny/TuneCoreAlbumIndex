@@ -1,0 +1,1 @@
+$("img").lazyload({effect:"fadeIn"})

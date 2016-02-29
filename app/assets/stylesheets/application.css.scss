@@ -39,12 +39,12 @@ nav {
   }
 }
 
-#albums {
+#albums-list {
   margin: 0 auto;
-  width: 100%;
+  width: 200px;
   .box {
     margin: 10px;
-    width: 350px;
+    width: 100%;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
     border-radius: 7px;
     text-align: center;
@@ -67,6 +67,17 @@ nav {
       margin: 0;
     }
   }
+}
+
+.loading-pagination {
+  height:30px;
+  width:30px;
+  display:block;
+  margin:50px auto;
+}
+
+nav.pagination{
+  display: none;
 }
 
 #edit_page {

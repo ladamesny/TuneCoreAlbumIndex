@@ -24,6 +24,7 @@ ruby "2.2.1"
   gem 'masonry-rails', '~> 0.2.4'
   gem 'sass-rails', '>= 3.2'
   gem 'bootstrap-sass', '~> 3.3.6'
+  gem 'dalli'
 
 group :development, :test do
   gem 'rspec-rails'
