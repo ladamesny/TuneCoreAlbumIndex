@@ -1,0 +1,50 @@
+#paginate_container
+  .row.transitions-enabled
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            No.
+          %th
+            Name
+          %th
+            Time
+          %th
+            Artist
+          %th
+            Album
+      %tbody#songs-list
+        -@songs.each do | song |
+          =render partial: 'song', locals: { song: song }
+
+      = paginate @songs, :remote => true, display: 'none'
+
+  - unless @songs.last_page?
+    #loading_symbol.loading-pagination{ style: "margin-top:-50px"}
+      = image_tag 'progress-circle-master.svg', class:'loading-pagination'
+
+:javascript
+  $(window).scroll(function() {
+   if($(window).scrollTop() > $(document).height() - $(window).height() - 150)
+      loadMoreResults();
+   return $(window).scroll;
+  });
+
+  window.last_url ='';
+
+  function loadMoreResults() {
+    var url = $('nav.pagination a[rel=next]').attr('href');
+    if (url != undefined && url != window.last_url) {
+      window.last_url = url;
+      var prevImageLength = $("img.album_images").length;
+
+      $.getScript(url).done(function(data, textStatus, jqxhr) {
+        var imageLength = $("img.album_images").length;
+        var upcommingImages = imageLength - prevImageLength;
+        var gtCurrentBatch = imageLength - upcommingImages;
+        $("img.album_images:gt(" + gtCurrentBatch.toString() + "), img.album_images:eq(" + gtCurrentBatch.toString() + ")").lazyload({
+          effect : "fadeIn"
+        });
+      });
+    }
+  };

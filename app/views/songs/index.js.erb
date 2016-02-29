@@ -1,0 +1,11 @@
+<% @songs.each do |song| %>
+  $('#songs-list').append('<%= j render partial: "songs/song", locals: { song: song } %>')
+<% end %>
+
+<% if @songs.last_page? %>
+  $(window).off('scroll');
+  $('.loading-pagination').remove();
+  $('.pagination').remove();
+<% else %>
+  $('.pagination').html('<%= j paginate @songs %>')
+<% end %>

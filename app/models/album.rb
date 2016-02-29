@@ -13,13 +13,12 @@ class Album < ActiveRecord::Base
 
   # Class Methods
   def self.prepare_albums_cache
-    Album.all.each do |album|
-      unless Rails.cache.exist?([:album, album.id, :artwork ]).nil?
-        data = ITunesSearchAPI.lookup(:id => album.albumId, :country => "US", :media => "music", entity: "album" )
-        data['id'] = album.id
-        Rails.cache.write([:album, album.id, :artwork ], data['artworkUrl100'])
-      end
-    end
+    CacheAlbumsWorker.perform_async
+  end
+
+  def data_cached?
+    id = self.last.id
+    Rails.cache.exist?([:album, id, :artwork])
   end
 
   # Instance Method

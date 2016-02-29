@@ -19,9 +19,4 @@ class ApplicationController < ActionController::Base
       record
     end
   end
-
-  def data_cached?
-    id = Album.last.id
-    Rails.cache.exist?([:album, id, :artwork])
-  end
 end
