@@ -20,12 +20,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def prepare_albums_index albums
-    responses = []
-    albums.each do |album|
-     responses << ITunesSearchAPI.lookup(:id => album.albumId, :country => "US", :media => "music", entity: "album" )
-     responses.last['id'] = album.id
-    end
-    responses
+  def data_cached?
+    id = Album.last.id
+    Rails.cache.exist?([:album, id, :artwork])
   end
 end

@@ -1,10 +1,8 @@
 class AlbumsController < ApplicationController
 
   def index
-    @all_albums = prepare_albums_index(Album.all)
-    unless params[:page]
-      session[:selections] = @all_albums.map{ |a| a['id'] }
-    end
+    Album.prepare_albums_cache unless data_cached?
+    @all_albums = Album.all
     @albums =  Kaminari.paginate_array(@all_albums).page(params[:page]).per(12)
   end
 

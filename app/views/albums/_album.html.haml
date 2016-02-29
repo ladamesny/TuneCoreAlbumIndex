@@ -1,9 +1,9 @@
-= link_to album_path(album['id']) do
+= link_to album do
   .box.panel.panel-default
-    = image_tag album['artworkUrl100'], class: 'album_images'
+    = image_tag album.artwork, class: 'album_images'
     .panel-body
       %h5
-        = album['collectionName']
+        = album.title
       %p.artist
         Artist:
-        = album['artistName']
+        = album.artist.name
