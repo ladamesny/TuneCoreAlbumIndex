@@ -1,0 +1,47 @@
+#search_form
+  .row
+    = form_tag search_path, class: "form-inline", method: :post do
+      %h3
+        Search songs in database by keyword
+      .form-group
+        = text_field_tag :search, nil, class: 'form-control'
+      = submit_tag 'Search', class: "btn btn-default"
+%hr
+#paginate_container
+  .row.transitions-enabled.table-responsive
+    %table.table.table-hover
+      %thead
+        %tr
+          %th
+            Track No.
+          %th
+            Name
+          %th
+            Time
+          %th
+            Artist
+          %th
+            Album
+      %tbody#songs-list
+        -@songs.each do | song |
+          =render partial: 'song', locals: { song: song }
+
+
+:javascript
+
+  $('#songs-list').on('click', 'tr', function(){
+    var audioElement = $(this).find('audio')[0];
+
+    $('audio').each(function(){
+      if (this != audioElement)
+        {
+          this.pause(); // Stop playing
+          this.currentTime = 0; // Reset time
+        }
+    });
+
+    if (audioElement.paused == true)
+      audioElement.play();
+    else
+      audioElement.pause();
+  });

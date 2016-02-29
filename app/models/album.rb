@@ -1,7 +1,8 @@
 class Album < ActiveRecord::Base
   include PgSearch
+  multisearchable :against => [:title]
   pg_search_scope :search, :against => :title,
-    using: { tsearch: {dictionary: "english" } },
+    using: { tsearch: {dictionary: "english", prefix: true } },
     associated_against: { artist: :name, songs: :title },
     ignoring: :accents
 
@@ -13,10 +14,15 @@ class Album < ActiveRecord::Base
 
   # Class Methods
   def self.prepare_albums_cache
-    CacheAlbumsWorker.perform_async
+    Album.all.each do |album|
+      unless Rails.cache.exist?([:album, album.id, :artwork ])
+        data = ITunesSearchAPI.lookup(:id => album.albumId, :country => "US", :media => "music", entity: "album" )
+        Rails.cache.write([:album, album.id, :artwork ], data['artworkUrl100'])
+      end
+    end
   end
 
-  def data_cached?
+  def self.data_cached?
     id = self.last.id
     Rails.cache.exist?([:album, id, :artwork])
   end

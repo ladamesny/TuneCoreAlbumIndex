@@ -26,6 +26,7 @@ artists.each do |name|
         unless newAlbum.songs.map{|song| song.title }.include?(track['trackName'])
           song = Song.create(title: track['trackName'], songId: track['trackId'])
           newAlbum.songs << song
+          artist.songs << song
         end
       end
       newAlbum.save!

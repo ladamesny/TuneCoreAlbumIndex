@@ -4,6 +4,7 @@ class Artist < ActiveRecord::Base
   pg_search_scope :search_by_name, :against => :name
 
   has_many :albums, dependent: :destroy
+  has_many :songs
 
   validates_presence_of :name
   validates_uniqueness_of :name, case_insensitive: false

@@ -1,10 +1,19 @@
+#search_form
+  .row
+    = form_tag search_path, class: "form-inline", method: :post do
+      %h3
+        Search songs in database by keyword
+      .form-group
+        = text_field_tag :search, nil, class: 'form-control'
+      = submit_tag 'Search', class: "btn btn-default"
+%hr
 #paginate_container
-  .row.transitions-enabled
+  .row.transitions-enabled.table-responsive
     %table.table.table-hover
       %thead
         %tr
           %th
-            No.
+            Track No.
           %th
             Name
           %th
@@ -17,7 +26,7 @@
         -@songs.each do | song |
           =render partial: 'song', locals: { song: song }
 
-      = paginate @songs, :remote => true, display: 'none'
+  = paginate @songs, :remote => true, display: 'none', params: {authenticity_token: nil, commit: nil, utf8: nil, action: nil}
 
   - unless @songs.last_page?
     #loading_symbol.loading-pagination{ style: "margin-top:-50px"}
@@ -34,6 +43,7 @@
 
   function loadMoreResults() {
     var url = $('nav.pagination a[rel=next]').attr('href');
+    debugger
     if (url != undefined && url != window.last_url) {
       window.last_url = url;
       var prevImageLength = $("img.album_images").length;
