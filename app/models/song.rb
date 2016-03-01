@@ -40,7 +40,7 @@ class Song < ActiveRecord::Base
   # Instance Method
 
   def artist_name
-    self.album.artist.name
+    self.artist.name
   end
 
   def preview
