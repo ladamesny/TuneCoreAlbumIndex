@@ -1,28 +1,28 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TuneCore Album Index
 
-Things you may want to cover:
+We distribute many songs and albums to iTunes and need a search interface for customer service. Can you design and implement a Rails app for a search interface for customer service to search our song database by any combination of song title, album title, and artist name?
 
-* Ruby version
+Minimum Requirements
 
-* System dependencies
+- 500 songs, 100 albums, 10 artists
+- Responsive user interface
+- Return a list of songs with album and artist info
+- Avoid use of a off-the-shelf search libraries and platforms
+- Tests
 
-* Configuration
+Open ended question we can talk about when you’re here: What if we had 100 million songs. How might you deal with this kind of search?
 
-* Database creation
+Feel free to install gems. You should use bundler. Please upload the finished code to Github so we can review it.
 
-* Database initialization
+****SUBMISSION****
 
-* How to run the test suite
+My submission uses the itunes api to lookup music data such as album artwork, track times, track number and a 30 sec sample of the music.
 
-* Services (job queues, cache servers, search engines, etc.)
+The database stores only a name or title, and an itunes id for each model (artist, song, album). I'm using pg_search gem to search all three models' text fields for partial string matches. The api data is stored in memcached by a sidekiq worker that is run whenever the index page is loaded and only if the data wasn't cached already.
 
-* Deployment instructions
+Please run the seedfile before testing the application.
 
-* ...
+Thank you
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.

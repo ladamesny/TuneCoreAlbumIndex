@@ -13,6 +13,8 @@ class SongsController < ApplicationController
   end
 
   def run_caching
-    CacheSongsWorker.perform_async
+    unless Song.data_cached? && Album.data_cached?
+      CacheSongsWorker.perform_async
+    end
   end
 end
