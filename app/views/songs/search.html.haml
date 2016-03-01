@@ -1,11 +1,16 @@
 #search_form
   .row
-    = form_tag search_path, class: "form-inline", method: :post do
+    .col-md-6.col-xs-12.search-form
+      = form_tag search_path, class: "form-inline", method: :post do
+        %h3
+          Search songs in database by keyword
+        .form-group
+          = text_field_tag :search, nil, class: 'form-control'
+        = submit_tag 'Search', class: "btn btn-default"
+    .col-md-6.col-xs-12.searched-text
       %h3
-        Search songs in database by keyword
-      .form-group
-        = text_field_tag :search, nil, class: 'form-control'
-      = submit_tag 'Search', class: "btn btn-default"
+        ="'#{@term}' returned #{@songs.size} matching songs"
+
 %hr
 #paginate_container
   .row.transitions-enabled.table-responsive
@@ -39,6 +44,9 @@
           this.currentTime = 0; // Reset time
         }
     });
+
+    $(this).find('.fa-play').toggle();
+    $(this).find('.fa-pause').toggle();
 
     if (audioElement.paused == true)
       audioElement.play();

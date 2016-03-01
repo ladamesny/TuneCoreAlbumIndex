@@ -27,7 +27,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 nav {
+  position: fixed;
+  top: 0px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+  height: 80px;
   .navbar-brand {
     a {
       color: #BD1E23;
@@ -38,36 +41,42 @@ nav {
     }
   }
 }
+thead tr {
 
-#albums-list {
-  margin: 0 auto;
-  width: 200px;
-  .box {
-    margin: 10px;
-    width: 100%;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
-    border-radius: 7px;
+}
+
+tr.song {
+  max-height: 100px;
+  td.vert-align {
+    font-weight: bold;
+    vertical-align: middle;
     text-align: center;
-    img {
-      max-width: 100%;
-      height: auto;
-    }
-    h2 {
-      font-size: 22px;
-      margin: 0;
-      padding: 25px 10px;
-      a {
-        color: #474747;
-      }
-    }
-    .user {
-      font-size: 12px;
-      border-top: 1px solid #EAEAEA;
-      padding: 15px;
-      margin: 0;
-    }
   }
 }
+
+.hvr-grow {
+  position: relative;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  cursor: pointer;
+  &:hover {
+    -ms-transform: scale(1.05);
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    filter: none;
+    -webkit-filter: blur(0px);
+    -moz-filter: blur(0px);
+    -ms-filter: blur(0px);
+    filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
+  }
+}
+
+
 
 .loading-pagination {
   height:30px;
@@ -78,51 +87,4 @@ nav {
 
 nav.pagination{
   display: none;
-}
-
-#edit_page {
-  .current_image {
-    img {
-      display: block;
-      margin: 20px 0;
-    }
-  }
-}
-
-#album_show {
-  .panel-heading {
-    padding: 0;
-  }
-  .album_image {
-    img {
-      max-width: 100%;
-      width: 100%;
-      display: block;
-      margin: 0 auto;
-    }
-  }
-  .panel-body {
-    padding: 35px;
-    h1 {
-      margin: 0 0 10px 0;
-    }
-    .description {
-      color: #868686;
-      line-height: 1.75;
-      margin: 0;
-    }
-  }
-  .panel-footer {
-    padding: 20px 35px;
-    p {
-      margin: 0;
-    }
-    .user {
-      padding-top: 8px;
-    }
-  }
-}
-
-textarea {
-  min-height: 250px;
 }

@@ -1,9 +1,12 @@
-%tr{id: "song_#{song.id}", class: 'song'}
-  %td.play-button=song.track_number
-  %td=song.title
-  %td=convert_to_duration(song.track_time)
-  %td=song.artist_name
-  %td=song.album.title
-  %td{style: 'display:none;'}
+%tr{id: "song_#{song.id}", class: 'song hvr-grow'}
+  %td.play-button.vert-align{ style: "background: url(#{song.album.artwork}); width:100px; height:100px; color:white; font-size: 20px;"}
+    =song.track_number
+    %i.fa.fa-play{style: 'color: black;'}
+    %i.fa.fa-pause{style: 'color: black; display:none'}
+  %td.vert-align=song.title
+  %td.vert-align=convert_to_duration(song.track_time)
+  %td.vert-align=song.artist_name
+  %td.vert-align=song.album.title
+  %td.vert-align{style: 'display:none;'}
     %audio{ autoplay: false}
       %source{src: song.preview, type: "audio/mpeg"}

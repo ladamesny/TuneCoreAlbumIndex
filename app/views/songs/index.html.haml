@@ -9,15 +9,15 @@
 %hr
 #paginate_container
   .row.transitions-enabled.table-responsive
-    %table.table.table-hover
+    %table.table.table-hover.table-condensed
       %thead
         %tr
           %th
             Track No.
           %th
-            Name
+            Song
           %th
-            Time
+            Duration
           %th
             Artist
           %th
@@ -70,8 +70,12 @@
         }
     });
 
+    $(this).find('.fa-play').toggle();
+    $(this).find('.fa-pause').toggle();
+
     if (audioElement.paused == true)
       audioElement.play();
     else
       audioElement.pause();
+
   });

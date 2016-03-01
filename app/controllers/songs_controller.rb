@@ -7,15 +7,12 @@ class SongsController < ApplicationController
   end
 
   def search
+    redirect_to songs_path unless params[:search].present?
+    @term = params[:search]
     @songs = Song.return_matched_songs(params[:search])
   end
 
   def run_caching
-    begin
-      Song.prepare_songs_cache unless Song.data_cached?
-      Album.prepare_albums_cache unless Album.data_cached?
-    rescue NoMethodError
-      puts "****API Call to Itunes did not return results****"
-    end
+    CacheSongsWorker.perform_async
   end
 end
